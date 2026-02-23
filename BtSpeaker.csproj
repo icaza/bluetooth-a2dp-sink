@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <RootNamespace>BtSpeaker</RootNamespace>
+    <Nullable>disable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Platforms>AnyCPU;x64</Platforms>
+    <StartupObject>BtSpeaker.Program</StartupObject>
+    <ApplicationIcon>ico\Bluetooth.ico</ApplicationIcon>
+    <Authors>ICAZA MEDIA</Authors>
+    <Company>ICAZA MEDIA</Company>
+    <Description>Application console  for streaming audio over a local network. It allows you to stream your computer's internal audio to any device on the network. </Description>
+    <Copyright>ICAZA MEDIA</Copyright>
+    <PackageProjectUrl>https://veydunet.com</PackageProjectUrl>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="ico\Bluetooth.ico" />
+  </ItemGroup>
+</Project>
