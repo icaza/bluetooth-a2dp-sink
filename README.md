@@ -42,7 +42,7 @@ Phone / Tablet  ──(Bluetooth A2DP)──►  Windows PC  ──►  Speakers
 ### 1. Clone and build
 
 ```bash
-git clone https://github.com/yourname/bluetooth-a2dp-sink.git
+git clone https://github.com/icaza/bluetooth-a2dp-sink.git
 cd bluetooth-a2dp-sink
 dotnet build -p:Platform=x64
 ```
@@ -67,8 +67,8 @@ Press `L` to list available devices, then `C` to connect.
 
 ```
 ╔══════════════════════════════════════════╗
-║     Bluetooth Speaker — A2DP Sink        ║
-║     Windows 10 2004+ / .NET 8            ║
+║     Bluetooth Speaker — A2DP Sink             ║
+║     Windows 10 2004+ / .NET 8                 ║
 ╚══════════════════════════════════════════╝
 
   [L] List available Bluetooth audio devices
