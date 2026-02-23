@@ -160,4 +160,4 @@ Aucun package NuGet requis. Toutes les APIs sont fournies par le TFM .NET 8 Wind
 
 ## Licence
 
-MIT — voir [LICENSE](LICENSE) pour les détails.
+MIT — voir [LICENSE](https://github.com/icaza/bluetooth-a2dp-sink/blob/master/LICENSE.txt) pour les détails.
