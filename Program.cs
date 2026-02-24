@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,8 +46,12 @@ namespace BtSpeaker
 
         static async Task Main(string[] args)
         {
+            Assembly thisAssem = typeof(Program).Assembly;
+            AssemblyName thisAssemName = thisAssem.GetName();
+            Version ver = thisAssemName.Version;
             ArgumentNullException.ThrowIfNull(args);
-            Console.Title = "Bluetooth A2DP Sink";
+
+            Console.Title = string.Format("Bluetooth A2DP Sink {0}", ver);
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             // Priorité temps-réel du processus entier
@@ -55,11 +60,11 @@ namespace BtSpeaker
             // Empêche la mise en veille pendant le streaming
             _ = SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_AWAYMODE_REQUIRED);
 
-            Print("╔══════════════════════════════════════════╗");
-            Print("║       Bluetooth Speaker — A2DP Sink      ║");
-            Print("║         Windows 10 2004+ / .NET 8        ║");
-            Print("║            Author: ICAZA MEDIA           ║");
-            Print("╚══════════════════════════════════════════╝");
+            Error("╔══════════════════════════════════════════╗");
+            Error("║       Bluetooth Speaker — A2DP Sink      ║");
+            Error("║         Windows 10 2004+ / .NET 8        ║");
+            Error("║            Author: ICAZA MEDIA           ║");
+            Error("╚══════════════════════════════════════════╝");
             Print("");
 
             if (!ApiInformation.IsTypePresent("Windows.Media.Audio.AudioPlaybackConnection"))
@@ -69,7 +74,7 @@ namespace BtSpeaker
                 return;
             }
 
-            Ok("API AudioPlaybackConnection available.");
+            Ok(" API AudioPlaybackConnection available");
             PrintHelp();
 
             bool running = true;
@@ -131,6 +136,7 @@ namespace BtSpeaker
             for (int i = 0; i < devices.Count; i++)
                 Print($"  [{i + 1}] {devices[i].Name}");
 
+            Print("");
             Console.Write("Number : ");
             if (int.TryParse(Console.ReadLine(), out int idx) && idx >= 1 && idx <= devices.Count)
                 await ConnectAsync(devices[idx - 1].Id, devices[idx - 1].Name);
@@ -152,6 +158,7 @@ namespace BtSpeaker
                 }
 
                 Print($"Login to {deviceName}...");
+                Print("");
 
                 var conn = AudioPlaybackConnection.TryCreateFromId(deviceId);
                 if (conn == null)
@@ -325,19 +332,21 @@ namespace BtSpeaker
         static void PrintLatencyTips()
         {
             Print("");
-            Print("── Tips to Reduce Latency and Crackling ──────────");
-            Print("• Codec: Windows negotiates SBC by default (~200ms).");
-            Print("If your device supports AAC, disable SBC in");
-            Print("Settings → Bluetooth → [device] → Advanced properties.");
-            Print("• Distance: Stay within 5m of the PC, avoid obstacles.");
-            Print("• Interference: Stay away from 2.4GHz WiFi networks,");
-            Print("microwaves, other active BT devices.");
-            Print("• BT Adapter: A dedicated USB BT 5.0 adapter");
-            Print("(e.g., ASUS BT500) significantly reduces latency");
-            Print("vs. Bluetooth integrated into the motherboard.");
-            Print("• Windows power plan: switch to 'High performance'");
-            Print("(Control Panel → Power Options).");
-            Print("  ────────────────────────────────────────────────────────────");
+            Warn("── Tips to Reduce Latency and Crackling ────────────────");
+            Print("");
+            Infos(" • Codec: Windows negotiates SBC by default (~200ms).");
+            Infos(" If your device supports AAC, disable SBC in");
+            Infos(" Settings → Bluetooth → [device] → Advanced properties.");
+            Infos(" • Distance: Stay within 5m of the PC, avoid obstacles.");
+            Infos(" • Interference: Stay away from 2.4GHz WiFi networks,");
+            Infos(" microwaves, other active BT devices.");
+            Infos(" • BT Adapter: A dedicated USB BT 5.0 adapter");
+            Infos(" (e.g., ASUS BT500) significantly reduces latency");
+            Infos(" vs. Bluetooth integrated into the motherboard.");
+            Infos(" • Windows power plan: switch to 'High performance'");
+            Infos(" (Control Panel → Power Options).");
+            Print("");
+            Warn("────────────────────────────────────────────────────────");
             Print("");
         }
 
@@ -372,6 +381,8 @@ namespace BtSpeaker
         static void PrintHelp()
         {
             Print("");
+            Warn("── Commands ────────────────────────────────");
+            Print("");
             Print("  [L] List of Bluetooth audio devices");
             Print("  [C] Connect a device");
             Print("  [D] Disconnect a device");
@@ -381,6 +392,8 @@ namespace BtSpeaker
             Print("  [I] Latency Tips");
             Print("  [Q] Quit");
             Print("");
+            Warn("────────────────────────────────────────────");
+            Print("");
         }
 
         // ── Console helpers ──────────────────────────────────────────────
@@ -388,6 +401,7 @@ namespace BtSpeaker
         static void Print(string msg) => Console.WriteLine(msg);
         static void Ok(string msg) { Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine(msg); Console.ResetColor(); }
         static void Warn(string msg) { Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine(msg); Console.ResetColor(); }
+        static void Infos(string msg) { Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine(msg); Console.ResetColor(); }
         static void Error(string msg) { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(msg); Console.ResetColor(); }
     }
 }

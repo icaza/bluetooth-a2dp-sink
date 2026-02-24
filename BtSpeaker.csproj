@@ -15,8 +15,8 @@
     <Description>Application console  for streaming audio over a local network. It allows you to stream your computer's internal audio to any device on the network. </Description>
     <Copyright>ICAZA MEDIA</Copyright>
     <PackageProjectUrl>https://veydunet.com</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <FileVersion>1.0.0.2</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="ico\Bluetooth.ico" />
