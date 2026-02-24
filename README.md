@@ -66,10 +66,10 @@ Press `L` to list available devices, then `C` to connect.
 ## Usage
 
 ```
-╔══════════════════════════════════════════╗
+╔═════════════════════════════╗
 ║     Bluetooth Speaker — A2DP Sink   ║
 ║     Windows 10 2004+ / .NET 8       ║
-╚══════════════════════════════════════════╝
+╚═════════════════════════════╝
 
   [L] List available Bluetooth audio devices
   [C] Connect a device
